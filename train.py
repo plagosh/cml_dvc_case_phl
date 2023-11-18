@@ -16,9 +16,6 @@ target = 'cnt'
 feature_list = list(df.columns)
 feature_list.remove(target)
 
-clf = MLPClassifier(random_state=0, max_iter=50)
-clf.fit(X_train,y_train)
-
 ciclista_X_data = df[feature_list]
 ciclista_X_target = df[target]
 model = linear_model.LinearRegression()
