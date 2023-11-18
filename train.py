@@ -1,36 +1,26 @@
-from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import recall_score, precision_score
+from sklearn import datasets, linear_model
 import json
 import os
 import numpy as np
 import pandas as pd
-
+import matplotlib as plt  
+import seaborn as sns
 
 # Read in data
-X_train = np.genfromtxt("data/train_features.csv")
-y_train = np.genfromtxt("data/train_labels.csv")
-X_test = np.genfromtxt("data/test_features.csv")
-y_test = np.genfromtxt("data/test_labels.csv")
-
+df = pd.read_csv('day.csv')
 
 # Fit a model
+df = df.drop(columns=['season','yr','mnth','instant','casual','registered','holiday','weekday','workingday','weathersit'])   # Elimine las columnas que crea que no son necesarias
 
-clf = MLPClassifier(random_state=0, max_iter=30)
-clf.fit(X_train,y_train)
+target = 'cnt'
+feature_list = list(df.columns)
+feature_list.remove(target)
 
-# Get overall accuracy
-acc = clf.score(X_test, y_test)
-
-# Get precision and recall
-y_score = clf.predict(X_test)
-prec = precision_score(y_test, y_score)
-rec = recall_score(y_test,y_score)
-
-# Get the loss
-loss = clf.loss_curve_
-pd.DataFrame(loss, columns=["loss"]).to_csv("loss.csv", index=False)
+ciclista_X_data = df[feature_list]
+ciclista_X_target = df[target]
+model = linear_model.LinearRegression()
+type(model)
+model.fit(ciclista_X_data,ciclista_X_target)
 
 with open("metrics.json", 'w') as outfile:
-        json.dump({ "accuracy": acc, "precision":prec,"recall":rec}, outfile)
-
-
+        json.dump({ "coeficiente": model.coef_, "intercepto":model.intercept_}, outfile)
