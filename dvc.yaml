@@ -7,6 +7,3 @@ stages:
     metrics:
     - metrics.json:
         cache: false
-    plots:
-    - loss.csv:
-        cache: false
