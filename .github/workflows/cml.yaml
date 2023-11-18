@@ -36,4 +36,5 @@ jobs:
 
           # Use DVC metrics diff to compare metrics to master
           git fetch --prune --unshallow
-          dvc metrics diff master --show-md >> report.md
+          cat metrics.txt >> report.md
+          # dvc metrics diff master --show-md >> report.md
