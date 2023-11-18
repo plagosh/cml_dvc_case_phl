@@ -10,7 +10,7 @@ import seaborn as sns
 df = pd.read_csv('day.csv')
 
 # Fit a model
-df = df.drop(columns=['season','yr','mnth','instant','casual','registered','holiday','weekday','workingday','weathersit'])   # Elimine las columnas que crea que no son necesarias
+df = df.drop(columns=['season','yr','mnth','instant','casual','registered','holiday','weekday','workingday','weathersit','dteday'])   # Elimine las columnas que crea que no son necesarias
 
 target = 'cnt'
 feature_list = list(df.columns)
