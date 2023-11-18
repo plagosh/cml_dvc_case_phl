@@ -21,6 +21,8 @@ ciclista_X_target = df[target]
 model = linear_model.LinearRegression()
 type(model)
 model.fit(ciclista_X_data,ciclista_X_target)
+coef = model.intercept_
+# intercepto[] = model.coef_
 
 with open("metrics.json", 'w') as outfile:
-        json.dump({ "coeficiente": model.coef_, "intercepto":model.intercept_}, outfile)
+        json.dump({ "coeficiente": coef}, outfile)
